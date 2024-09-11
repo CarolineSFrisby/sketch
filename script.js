@@ -6,7 +6,13 @@ let pixelDiv;
 
 button.addEventListener(`click`,resizeGrid);
 
-container.addEventListener('mouseover',(e) =>{
+// listen for mouse down and moving to color
+// listen for mouse up to stop coloring
+container.addEventListener('mousedown', function(e) {
+    container.addEventListener('mousemove', mouseMove);
+    container.addEventListener('mouseup', mouseUp);
+});
+function mouseMove(e){
     let targetPixelID = '#' + e.target.id;
     let targetPixel = document.querySelector(targetPixelID);
     targetPixel.style.backgroundColor = randomColour();
@@ -14,9 +20,13 @@ container.addEventListener('mouseover',(e) =>{
     let newOpacity = (Number(currentOpacity)*10 + 1)/10;
     targetPixel.style.opacity = newOpacity;
     console.log(targetPixel.style.opacity = newOpacity);
-})
+}
+function mouseUp(event){
+    container.removeEventListener('mousemove', mouseMove);
+    container.removeEventListener('mouseup', mouseUp);
+}
 
-
+// grab random color for cell
 function randomColour(){
     function randomRGB(){
         let rGB = (Math.random()*256);
@@ -30,8 +40,9 @@ function randomColour(){
     return finalColour;
 }
 
+//resizing grid by user input
 function resizeGrid(){
-    let promptMessage = `What dimensions do you want your grid to be (X by X)? Enter a number between 1 and 100.`;
+    let promptMessage = `Choose your grid dimension! Enter a number between 1 and 100.`;
     let newSize = prompt(promptMessage);
     newSize = Number(newSize);
     while (isNaN(newSize)
@@ -46,6 +57,7 @@ function resizeGrid(){
     createRow(newSize);
 }
 
+// create rows and cells
 function createRow(numberOfRows){
     for (let i = 0; i < numberOfRows; i++){
         rowDiv = document.createElement("div");
@@ -55,7 +67,6 @@ function createRow(numberOfRows){
         createCell(numberOfRows, i);
     }
 }
-
 function createCell(numberOfRows,rowNumber){
     for (let j = 0; j < numberOfRows; j++){
         pixelDiv = document.createElement("div");
@@ -66,4 +77,5 @@ function createCell(numberOfRows,rowNumber){
     }
 }
 
+//default grid setup
 createRow(16);

@@ -1,3 +1,29 @@
+header{
+    background-color: rgb(150, 6, 6);
+    text-align: center;
+    color: rgb(255, 241, 214);
+    border-style: solid;
+    border-color: beige;
+    border-radius: 30px;
+    margin-bottom: 10px;
+}
+
+body{
+    background-color: rgb(150, 6, 6);
+}
+
+.button{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+#resize{
+    border-style: solid;
+    border-color: beige;
+    border-width: 3px;
+    border-radius: 10px;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -9,6 +35,11 @@
     align-items: center;
     height: 95vh;
     width: 100%;
+    border-style: double;
+    border-radius: 10px;
+    border-width: 25px;
+    border-color: rgb(110, 11, 11);
+    background-color: white;
 }
 
 .row {
